@@ -1,0 +1,29 @@
+---
+
+- name: (dovecot_install) [1/3] File dovecot.conf is deployed
+  template:
+    src: ../templates/dovecot.conf.j2
+    dest: /etc/dovecot/dovecot.conf
+    owner: dovecot
+    group: dovecot
+    mode: 0644
+  notify: Restart dovecot
+
+- name: (dovecot_install) [2/3] File dovecot-sql.conf.ext is deployed
+  template:
+    src: ../templates/dovecot-sql.conf.ext.j2
+    dest: /etc/dovecot/dovecot-sql.conf.ext
+    owner: root
+    group: root
+    mode: 0600
+  notify: Restart dovecot
+
+- name: (dovecot_install) [3/3] Dovecot conf.d files are deployed
+  template:
+    src: "{{ item }}.j2"
+    dest: /etc/dovecot/conf.d/{{ item }}
+    owner: dovecot
+    group: dovecot
+    mode: 0644
+  with_items: "{{ dovecot_confd_files}}"
+  notify: Restart dovecot

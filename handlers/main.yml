@@ -1,0 +1,7 @@
+---
+# Handler actions. This is typically a restart of a service.
+
+- name: Restart dovecot
+  service:
+    name: dovecot
+    state: restarted

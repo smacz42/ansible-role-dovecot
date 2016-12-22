@@ -1,0 +1,22 @@
+---
+
+- name: (dovecot_install) [1/2] Dovecot is installed and is the latest version
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - dovecot
+    - dovecot-pigeonhole
+    - dovecot-mysql
+
+- name: (dovecot_install) [2/3] Dovecot is enabled on boot
+  service:
+    name: dovecot
+    enabled: yes
+
+- name: (dovecot_install) [3/3] User vmail is created
+  user:
+    name: vmail
+    state: present
+    uid: 8000
+    home: /var/vmail

@@ -1,0 +1,8 @@
+---
+# Tasks for Dovecot
+
+- include: dovecot_install.yml
+  tags: [dovecot,dovecot_install,install]
+
+- include: dovecot_config.yml
+  tags: [dovecot,dovecot_config,config]

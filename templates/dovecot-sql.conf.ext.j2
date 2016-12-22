@@ -1,0 +1,4 @@
+driver = mysql
+connect = host=127.0.0.1 dbname={{ mysql_dbname }} user={{ mysql_dbuser }} password={{ mysql_dbpasswd }}
+default_pass_scheme = SHA256-CRYPT
+password_query = SELECT email as user, password FROM virtual_users WHERE email='%u';
